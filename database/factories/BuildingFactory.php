@@ -14,13 +14,13 @@ class BuildingFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'postal_code' => $this->faker->postcode(),
-            'city' => $this->faker->city(),
-            'block' => $this->faker->word(),
-            'building' => $this->faker->word(),
-            'latitude' => $this->faker->latitude(),
-            'longitude' => $this->faker->longitude(),
+            'name' => $this->faker->name,
+            'postal_code' => $this->faker->postcode,
+            'city' => $this->faker->city,
+            'block' => $this->faker->streetAddress,
+            'building' => $this->faker->secondaryAddress,
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
