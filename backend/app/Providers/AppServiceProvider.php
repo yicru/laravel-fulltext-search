@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Building;
 use Illuminate\Support\ServiceProvider;
+use MeiliSearch\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $client = new Client(
+            url: config('scout.meilisearch.host'),
+            apiKey: config('scout.meilisearch.key')
+        );
+
+        $client->index('buildings')->updateFilterableAttributes([
+            '_geo'
+        ]);
     }
 }

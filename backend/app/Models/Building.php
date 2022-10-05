@@ -23,8 +23,27 @@ class Building extends Model
         'longitude',
     ];
 
+    public function getAddressAttribute(): string
+    {
+        return $this->postal_code.' '.$this->prefecture->name.' '.$this->city.' '.$this->block.' '.$this->building;
+    }
+
     public function prefecture(): BelongsTo
     {
         return $this->belongsTo(Prefecture::class);
+    }
+
+    public function toSearchableArray(): array
+    {
+        $array = $this->toArray();
+
+        $array['prefecture'] = $this->prefecture->name;
+
+        $array['_geo'] = [
+            'lat' => $this->latitude,
+            'lng' => $this->longitude,
+        ];
+
+        return $array;
     }
 }
